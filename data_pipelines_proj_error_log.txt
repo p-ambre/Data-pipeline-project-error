@@ -1,0 +1,46 @@
+*** Reading local file: /root/airflow/logs/s3_to_redshift_dags/Stage_songs/2020-08-03T03:03:43.654031+00:00/3.log
+[2020-08-03 03:06:15,872] {models.py:1359} INFO - Dependencies all met for <TaskInstance: s3_to_redshift_dags.Stage_songs 2020-08-03T03:03:43.654031+00:00 [queued]>
+[2020-08-03 03:06:15,903] {models.py:1359} INFO - Dependencies all met for <TaskInstance: s3_to_redshift_dags.Stage_songs 2020-08-03T03:03:43.654031+00:00 [queued]>
+[2020-08-03 03:06:15,903] {models.py:1571} INFO -
+--------------------------------------------------------------------------------
+Starting attempt 3 of 3
+--------------------------------------------------------------------------------
+
+[2020-08-03 03:06:15,928] {models.py:1593} INFO - Executing <Task(StageToRedshiftOperator): Stage_songs> on 2020-08-03T03:03:43.654031+00:00
+[2020-08-03 03:06:15,928] {base_task_runner.py:118} INFO - Running: ['bash', '-c', 'airflow run s3_to_redshift_dags Stage_songs 2020-08-03T03:03:43.654031+00:00 --job_id 211 --raw -sd DAGS_FOLDER/s3_to_redshift_dags.py --cfg_path /tmp/tmphcfoco4j']
+[2020-08-03 03:06:17,279] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs [2020-08-03 03:06:17,278] {settings.py:174} INFO - settings.configure_orm(): Using pool settings. pool_size=5, pool_recycle=1800, pid=1193
+[2020-08-03 03:06:18,769] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs [2020-08-03 03:06:18,768] {__init__.py:51} INFO - Using executor LocalExecutor
+[2020-08-03 03:06:19,239] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs [2020-08-03 03:06:19,239] {models.py:273} INFO - Filling up the DagBag from /home/workspace/airflow/dags/s3_to_redshift_dags.py
+[2020-08-03 03:06:19,442] {stage_redshift.py:40} INFO - Clearing data from destination Redshift table
+[2020-08-03 03:06:19,896] {logging_mixin.py:95} INFO - [2020-08-03 03:06:19,896] {dbapi_hook.py:166} INFO - DELETE FROM public.staging_songs
+[2020-08-03 03:06:20,012] {models.py:1788} ERROR - relation "public.staging_songs" does not exist
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.6/site-packages/airflow/models.py", line 1657, in _run_raw_task
+    result = task_copy.execute(context=context)
+  File "/home/workspace/airflow/plugins/operators/stage_redshift.py", line 41, in execute
+    redshift.run("DELETE FROM {}".format(self.table))
+  File "/opt/conda/lib/python3.6/site-packages/airflow/hooks/dbapi_hook.py", line 170, in run
+    cur.execute(s)
+psycopg2.ProgrammingError: relation "public.staging_songs" does not exist
+
+[2020-08-03 03:06:20,014] {models.py:1817} INFO - All retries failed; marking task as FAILED
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs Traceback (most recent call last):
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs   File "/opt/conda/bin/airflow", line 32, in <module>
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs     args.func(args)
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs   File "/opt/conda/lib/python3.6/site-packages/airflow/utils/cli.py", line 74, in wrapper
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs     return f(*args, **kwargs)
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs   File "/opt/conda/lib/python3.6/site-packages/airflow/bin/cli.py", line 526, in run
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs     _run(args, dag, ti)
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs   File "/opt/conda/lib/python3.6/site-packages/airflow/bin/cli.py", line 445, in _run
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs     pool=args.pool,
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs   File "/opt/conda/lib/python3.6/site-packages/airflow/utils/db.py", line 73, in wrapper
+[2020-08-03 03:06:20,037] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs     return func(*args, **kwargs)
+[2020-08-03 03:06:20,038] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs   File "/opt/conda/lib/python3.6/site-packages/airflow/models.py", line 1657, in _run_raw_task
+[2020-08-03 03:06:20,038] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs     result = task_copy.execute(context=context)
+[2020-08-03 03:06:20,038] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs   File "/home/workspace/airflow/plugins/operators/stage_redshift.py", line 41, in execute
+[2020-08-03 03:06:20,038] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs     redshift.run("DELETE FROM {}".format(self.table))
+[2020-08-03 03:06:20,038] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs   File "/opt/conda/lib/python3.6/site-packages/airflow/hooks/dbapi_hook.py", line 170, in run
+[2020-08-03 03:06:20,038] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs     cur.execute(s)
+[2020-08-03 03:06:20,038] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs psycopg2.ProgrammingError: relation "public.staging_songs" does not exist
+[2020-08-03 03:06:20,038] {base_task_runner.py:101} INFO - Job 211: Subtask Stage_songs
+[2020-08-03 03:06:20,834] {logging_mixin.py:95} INFO - [2020-08-03 03:06:20,833] {jobs.py:2527} INFO - Task exited with return code 1
